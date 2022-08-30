@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import Header from "host/header";
+import { StoreProvider, useStore } from "host/store";
 
 import "./index.css";
 
@@ -11,6 +12,8 @@ const launchFooter = () => {
 };
 
 const App = () => {
+  const { count, increment } = useStore();
+
   useEffect(() => {
     launchFooter();
   }, []);
@@ -19,6 +22,8 @@ const App = () => {
     <>
       <Header />
       <div className="container">
+        <div>The count is: {count}</div>
+        <button onClick={increment}>increment</button>
         <div>Name: host-app</div>
         <div>Framework: react</div>
         <div>Language: JavaScript</div>
@@ -29,4 +34,9 @@ const App = () => {
     </>
   );
 };
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(
+  <StoreProvider>
+    <App />
+  </StoreProvider>,
+  document.getElementById("app")
+);

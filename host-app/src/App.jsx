@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Header from "./components/header/header";
+import { StoreProvider } from "./store/store";
 
 import "./index.css";
 
@@ -15,4 +16,9 @@ const App = () => (
     </div>
   </>
 );
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(
+  <StoreProvider>
+    <App />
+  </StoreProvider>,
+  document.getElementById("app")
+);
