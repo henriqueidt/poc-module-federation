@@ -47,6 +47,7 @@ module.exports = {
       exposes: {
         "./header": "./src/components/header/header.jsx",
         "./store": "./src/store/store.js",
+        "./zustandStore": "./src/zustandStore/store.js",
       },
       shared: {
         ...deps,

@@ -4,15 +4,15 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: "http://localhost:3001/",
+    publicPath: "http://localhost:3003/",
   },
 
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    extensions: [".ts", ".tsx", ".jsx", ".js", ".json"],
   },
 
   devServer: {
-    port: 3001,
+    port: 3003,
     historyApiFallback: true,
   },
 
@@ -41,25 +41,16 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "receiver_app",
+      name: "web_components_app",
       filename: "remoteEntry.js",
       remotes: {
         host: "host_app@http://localhost:3000/remoteEntry.js",
-        vue: "vue_app@http://localhost:3002/remoteEntry.js",
-        webComponents:
-          "web_components_app@http://localhost:3003/remoteEntry.js",
       },
-      exposes: {},
+      exposes: {
+        "./counterInfo": "./src/components/counterInfo/counterInfo.js",
+      },
       shared: {
         ...deps,
-        react: {
-          singleton: true,
-          requiredVersion: deps.react,
-        },
-        "react-dom": {
-          singleton: true,
-          requiredVersion: deps["react-dom"],
-        },
       },
     }),
     new HtmlWebPackPlugin({

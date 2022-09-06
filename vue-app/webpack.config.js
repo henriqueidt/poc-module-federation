@@ -48,7 +48,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "vue_app",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        host: "host_app@http://localhost:3000/remoteEntry.js",
+      },
       exposes: {
         "./siteFooter": "./src/components/siteFooter/siteFooter.vue",
         "./mountFooter": "./src/components/siteFooter/mountFooter.js",
